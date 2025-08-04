@@ -92,7 +92,13 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(`服务器运行在端口 ${PORT}`);
-    console.log(`访问 http://localhost:${PORT} 查看应用`);
-});
+// 本地开发时启动服务器
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`服务器运行在端口 ${PORT}`);
+        console.log(`访问 http://localhost:${PORT} 查看应用`);
+    });
+}
+
+// Vercel 部署时导出 app
+module.exports = app;

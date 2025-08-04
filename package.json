@@ -8,8 +8,9 @@
     "dev": "nodemon src/server.js",
     "scrape": "node src/scraper/main.js",
     "build": "npm run build:client",
-    "build:client": "cd client && npm run build",
-    "install:all": "npm install && cd client && npm install"
+    "build:client": "cd client && npm install && npm run build",
+    "install:all": "npm install && cd client && npm install",
+    "vercel-build": "npm run build:client"
   },
   "dependencies": {
     "express": "^4.18.2",
