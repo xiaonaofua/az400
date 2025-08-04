@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import questionsData from '../data/questions.json';
 import './QuestionDetail.css';
 
 const QuestionDetail = () => {
@@ -8,40 +8,34 @@ const QuestionDetail = () => {
   const navigate = useNavigate();
   const [question, setQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [showOriginal, setShowOriginal] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [showAnswers, setShowAnswers] = useState(false);
-  const [allQuestions, setAllQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(-1);
 
   useEffect(() => {
-    const fetchQuestionAndList = async () => {
-      try {
-        setLoading(true);
-        
-        // 获取当前题目
-        const questionResponse = await axios.get(`/api/questions/${id}`);
-        setQuestion(questionResponse.data);
-        
-        // 获取所有题目列表用于导航
-        const allQuestionsResponse = await axios.get('/api/questions?limit=1000');
-        setAllQuestions(allQuestionsResponse.data.questions);
+    const loadQuestion = () => {
+      setLoading(true);
+      
+      // 找到当前题目
+      const currentQuestion = questionsData.find(q => q.id === id);
+      if (currentQuestion) {
+        setQuestion(currentQuestion);
         
         // 找到当前题目在列表中的索引
-        const index = allQuestionsResponse.data.questions.findIndex(q => q.id === id);
+        const index = questionsData.findIndex(q => q.id === id);
         setCurrentIndex(index);
-        
-        setError(null);
-      } catch (err) {
-        setError('无法加载题目详情');
-        console.error('获取题目详情失败:', err);
-      } finally {
-        setLoading(false);
       }
+      
+      setLoading(false);
     };
 
-    fetchQuestionAndList();
+    loadQuestion();
+    
+    // 重置状态
+    setSelectedAnswers([]);
+    setShowAnswers(false);
+    setShowOriginal(false);
   }, [id]);
 
   const handleAnswerSelect = (choiceIndex) => {
@@ -63,14 +57,14 @@ const QuestionDetail = () => {
 
   const handlePreviousQuestion = () => {
     if (currentIndex > 0) {
-      const prevQuestion = allQuestions[currentIndex - 1];
+      const prevQuestion = questionsData[currentIndex - 1];
       navigate(`/question/${prevQuestion.id}`);
     }
   };
 
   const handleNextQuestion = () => {
-    if (currentIndex < allQuestions.length - 1) {
-      const nextQuestion = allQuestions[currentIndex + 1];
+    if (currentIndex < questionsData.length - 1) {
+      const nextQuestion = questionsData[currentIndex + 1];
       navigate(`/question/${nextQuestion.id}`);
     }
   };
@@ -79,16 +73,6 @@ const QuestionDetail = () => {
     return <div className="loading">正在加载题目详情...</div>;
   }
 
-  if (error) {
-    return (
-      <div className="error">
-        {error}
-        <button className="refresh-button" onClick={() => navigate('/')}>
-          返回题目列表
-        </button>
-      </div>
-    );
-  }
 
   if (!question) {
     return (
@@ -237,13 +221,13 @@ const QuestionDetail = () => {
             </button>
             
             <span className="question-counter">
-              第 {currentIndex + 1} / {allQuestions.length} 题
+              第 {currentIndex + 1} / {questionsData.length} 题
             </span>
             
             <button 
               className="nav-button next-button" 
               onClick={handleNextQuestion}
-              disabled={currentIndex >= allQuestions.length - 1}
+              disabled={currentIndex >= questionsData.length - 1}
             >
               下一题 →
             </button>

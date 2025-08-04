@@ -3,33 +3,36 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import QuestionList from './components/QuestionList';
 import QuestionDetail from './components/QuestionDetail';
 import CountdownTimer from './components/CountdownTimer';
-import axios from 'axios';
+import questionsData from './data/questions.json';
 
 function App() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  const fetchStats = async () => {
-    try {
-      const response = await axios.get('/api/stats');
-      setStats(response.data);
-      setError(null);
-    } catch (err) {
-      setError('无法加载统计信息');
-      console.error('获取统计信息失败:', err);
-    } finally {
-      setLoading(false);
-    }
+  const calculateStats = () => {
+    const stats = {
+      totalQuestions: questionsData.length,
+      sources: {},
+      languages: {}
+    };
+    
+    questionsData.forEach(question => {
+      stats.sources[question.source] = (stats.sources[question.source] || 0) + 1;
+      stats.languages[question.originalLanguage] = (stats.languages[question.originalLanguage] || 0) + 1;
+    });
+    
+    return stats;
   };
 
   useEffect(() => {
-    fetchStats();
+    const statsData = calculateStats();
+    setStats(statsData);
+    setLoading(false);
   }, []);
 
 
   return (
-    <Router>
+    <Router basename="/az400">
       <div className="container">
         <header className="header">
           <h1>🚀 AZ-400 练习题库</h1>
@@ -38,15 +41,6 @@ function App() {
         </header>
 
         {loading && <div className="loading">加载中...</div>}
-        
-        {error && (
-          <div className="error">
-            {error}
-            <button className="refresh-button" onClick={fetchStats}>
-              重新加载
-            </button>
-          </div>
-        )}
 
         {stats && (
           <div className="stats-bar">

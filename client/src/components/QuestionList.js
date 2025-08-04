@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import questionsData from '../data/questions.json';
 
 const QuestionList = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState(null);
   const navigate = useNavigate();
+  const questionsPerPage = 12;
 
-  const fetchQuestions = async (page = 1) => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`/api/questions?page=${page}&limit=12`);
-      setQuestions(response.data.questions);
-      setPagination({
-        currentPage: response.data.currentPage,
-        totalPages: response.data.totalPages,
-        totalQuestions: response.data.totalQuestions,
-        hasNextPage: response.data.hasNextPage,
-        hasPrevPage: response.data.hasPrevPage
-      });
-      setError(null);
-    } catch (err) {
-      setError('无法加载题目列表');
-      console.error('获取题目失败:', err);
-    } finally {
-      setLoading(false);
-    }
+  const loadQuestions = (page = 1) => {
+    setLoading(true);
+    
+    const startIndex = (page - 1) * questionsPerPage;
+    const endIndex = page * questionsPerPage;
+    const paginatedQuestions = questionsData.slice(startIndex, endIndex);
+    
+    setQuestions(paginatedQuestions);
+    setPagination({
+      currentPage: page,
+      totalPages: Math.ceil(questionsData.length / questionsPerPage),
+      totalQuestions: questionsData.length,
+      hasNextPage: endIndex < questionsData.length,
+      hasPrevPage: page > 1
+    });
+    
+    setLoading(false);
   };
 
   useEffect(() => {
-    fetchQuestions(currentPage);
+    loadQuestions(currentPage);
   }, [currentPage]);
 
   const handleQuestionClick = (questionId) => {
@@ -53,16 +51,6 @@ const QuestionList = () => {
     return <div className="loading">正在加载题目...</div>;
   }
 
-  if (error) {
-    return (
-      <div className="error">
-        {error}
-        <button className="refresh-button" onClick={() => fetchQuestions(currentPage)}>
-          重新加载
-        </button>
-      </div>
-    );
-  }
 
   if (!questions || questions.length === 0) {
     return (
