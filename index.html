@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/><link rel="icon" href="/az400/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="AZ-400 Azure DevOps 练习题集合"/><title>AZ-400 练习题 - Azure DevOps 考试准备</title><style>body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background:linear-gradient(135deg,#667eea 0,#764ba2 100%);min-height:100vh}code{font-family:source-code-pro,Menlo,Monaco,Consolas,'Courier New',monospace}.official-links{background:rgba(255,255,255,0.1);padding:15px;margin:10px;border-radius:8px;text-align:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)}.official-links a{color:#fff;text-decoration:none;padding:8px 16px;background:rgba(255,255,255,0.2);border-radius:5px;margin:0 5px;display:inline-block;transition:all 0.3s}.official-links a:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px)}.exam-countdown{background:rgba(255,255,255,0.1);padding:15px;margin:10px;border-radius:8px;text-align:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)}</style><script defer="defer" src="/az400/static/js/main.958a279b.js"></script><link href="/az400/static/css/main.1a8f746c.css" rel="stylesheet"></head><body><noscript>您需要启用 JavaScript 来运行此应用。</noscript><div class="official-links"><p style="color:white;margin:0 0 10px 0;font-weight:bold;">📚 微软官方资源</p><a href="https://learn.microsoft.com/zh-cn/credentials/certifications/exams/az-400/" target="_blank" rel="noopener">AZ-400 考试详情</a><a href="https://learn.microsoft.com/zh-cn/credentials/certifications/exams/az-400/practice/assessment?assessment-type=practice&assessmentId=56" target="_blank" rel="noopener">进行免费的练习评估（需要登录）</a></div><div class="exam-countdown"><p style="color:white;margin:0 0 10px 0;font-weight:bold;">📅 考试倒计时</p><div style="margin-bottom:10px;"><label style="color:white;font-size:14px;display:block;margin-bottom:8px;">设置你的AZ-400考试日期：</label><input type="date" id="examDate" style="padding:8px 12px;border-radius:5px;border:none;background:rgba(255,255,255,0.9);font-size:14px;cursor:pointer;"/></div><div id="countdownDisplay" style="color:#4CAF50;font-size:18px;font-weight:bold;text-shadow:1px 1px 2px rgba(0,0,0,0.5);"></div><div id="statusMessage" style="color:rgba(255,255,255,0.8);font-size:12px;margin-top:5px;"></div></div><div id="root"></div><script>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/><link rel="icon" href="/az400/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="AZ-400 Azure DevOps 练习题集合"/><title>AZ-400 练习题 - Azure DevOps 考试准备</title><style>body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background:linear-gradient(135deg,#667eea 0,#764ba2 100%);min-height:100vh}code{font-family:source-code-pro,Menlo,Monaco,Consolas,'Courier New',monospace}.official-links{background:rgba(255,255,255,0.1);padding:15px;margin:10px;border-radius:8px;text-align:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)}.official-links a{color:#fff;text-decoration:none;padding:8px 16px;background:rgba(255,255,255,0.2);border-radius:5px;margin:0 5px;display:inline-block;transition:all 0.3s}.official-links a:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px)}.exam-countdown{background:rgba(255,255,255,0.1);padding:15px;margin:10px;border-radius:8px;text-align:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)}[style*="天"][style*="时"][style*="分"][style*="秒"]{display:none!important}div:has(>div[style*="天"][style*="时"]):not(.exam-countdown){display:none!important}</style><script defer="defer" src="/az400/static/js/main.958a279b.js"></script><link href="/az400/static/css/main.1a8f746c.css" rel="stylesheet"></head><body><noscript>您需要启用 JavaScript 来运行此应用。</noscript><div class="official-links"><p style="color:white;margin:0 0 10px 0;font-weight:bold;">📚 微软官方资源</p><a href="https://learn.microsoft.com/zh-cn/credentials/certifications/exams/az-400/" target="_blank" rel="noopener">AZ-400 考试详情</a><a href="https://learn.microsoft.com/zh-cn/credentials/certifications/exams/az-400/practice/assessment?assessment-type=practice&assessmentId=56" target="_blank" rel="noopener">进行免费的练习评估（需要登录）</a></div><div class="exam-countdown"><p style="color:white;margin:0 0 10px 0;font-weight:bold;">📅 考试倒计时</p><div style="margin-bottom:10px;"><label style="color:white;font-size:14px;display:block;margin-bottom:8px;">设置你的AZ-400考试日期：</label><input type="date" id="examDate" style="padding:8px 12px;border-radius:5px;border:none;background:rgba(255,255,255,0.9);font-size:14px;cursor:pointer;"/></div><div id="countdownDisplay" style="color:#4CAF50;font-size:18px;font-weight:bold;text-shadow:1px 1px 2px rgba(0,0,0,0.5);"></div><div id="statusMessage" style="color:rgba(255,255,255,0.8);font-size:12px;margin-top:5px;"></div></div><div id="root"></div><script>
 (function() {
   const examDateInput = document.getElementById('examDate');
   const countdownDisplay = document.getElementById('countdownDisplay');
@@ -49,5 +49,27 @@
   
   // 初始化显示
   updateCountdown();
+  
+  // 隐藏原来的时分秒倒计时
+  function hideOldCountdown() {
+    const allDivs = document.querySelectorAll('div');
+    allDivs.forEach(div => {
+      if (div.textContent && div.textContent.includes('时') && div.textContent.includes('分') && div.textContent.includes('秒')) {
+        // 隐藏包含时分秒的倒计时元素
+        let parent = div.parentElement;
+        while (parent && parent !== document.body) {
+          if (parent.className && !parent.className.includes('exam-countdown')) {
+            parent.style.display = 'none';
+            break;
+          }
+          parent = parent.parentElement;
+        }
+      }
+    });
+  }
+  
+  // 延迟执行以确保React组件已渲染
+  setTimeout(hideOldCountdown, 1000);
+  setInterval(hideOldCountdown, 2000);
 })();
 </script></body></html>
