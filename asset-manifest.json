@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/az400/static/css/main.1a8f746c.css",
+    "main.js": "/az400/static/js/main.958a279b.js",
+    "index.html": "/az400/index.html",
+    "main.1a8f746c.css.map": "/az400/static/css/main.1a8f746c.css.map",
+    "main.958a279b.js.map": "/az400/static/js/main.958a279b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1a8f746c.css",
+    "static/js/main.958a279b.js"
+  ]
+}

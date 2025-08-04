@@ -2,13 +2,7 @@
   "name": "az400-practice-questions",
   "version": "1.0.0",
   "description": "AZ-400 练习题静态网站 - 100道题目在线练习",
-  "main": "client/build/index.html",
-  "scripts": {
-    "start": "cd client && npm start",
-    "build": "cd client && npm install && npm run build",
-    "install": "cd client && npm install",
-    "deploy": "npm run build"
-  },
+  "main": "index.html",
   "keywords": ["az400", "azure", "devops", "exam", "practice", "static"],
   "author": "AZ-400 Study Tool",
   "license": "MIT",
